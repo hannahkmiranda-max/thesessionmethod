@@ -11,7 +11,13 @@ import { startCheckoutSession } from '@/app/actions/stripe'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-export default function Checkout({ productId }: { productId: string }) {
+export default function Checkout({ 
+  productId,
+  onComplete 
+}: { 
+  productId: string
+  onComplete?: () => void 
+}) {
   const fetchClientSecret = useCallback(async () => {
     const clientSecret = await startCheckoutSession(productId)
     if (!clientSecret) {
@@ -20,11 +26,17 @@ export default function Checkout({ productId }: { productId: string }) {
     return clientSecret
   }, [productId])
 
+  const handleComplete = useCallback(() => {
+    if (onComplete) {
+      onComplete()
+    }
+  }, [onComplete])
+
   return (
     <div id="checkout">
       <EmbeddedCheckoutProvider
         stripe={stripePromise}
-        options={{ fetchClientSecret }}
+        options={{ fetchClientSecret, onComplete: handleComplete }}
       >
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
