@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import dynamic from "next/dynamic"
 
 const Checkout = dynamic(() => import("@/components/checkout"), { ssr: false })
+const ReviewForm = dynamic(() => import("@/components/review-form"), { ssr: false })
 
 export default function TheSessionMethod() {
   const [checkoutOpen, setCheckoutOpen] = useState(false)
@@ -730,6 +731,63 @@ export default function TheSessionMethod() {
         .proc-spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
         .proc-txt{font-family:var(--fm);font-size:12px;color:var(--green);letter-spacing:.15em;text-transform:uppercase}
         
+        /* Review Form Styles */
+        .review-form-container{margin-top:40px;display:flex;justify-content:center}
+        .review-trigger-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;
+          background:transparent;border:1px solid var(--green);color:var(--green);
+          font-family:var(--ff);font-size:14px;font-weight:500;border-radius:8px;cursor:pointer;
+          transition:all .2s}
+        .review-trigger-btn:hover{background:var(--green);color:var(--bg)}
+        .review-trigger-btn svg{stroke:currentColor}
+        
+        .review-form-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(4px);
+          display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+        .review-form-modal{position:relative;background:var(--bg);border:1px solid var(--border);
+          border-radius:16px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:32px}
+        .review-close-btn{position:absolute;top:16px;right:16px;background:none;border:none;
+          color:var(--text3);cursor:pointer;padding:4px;transition:color .2s}
+        .review-close-btn:hover{color:var(--text)}
+        
+        .review-form-title{font-family:var(--ff);font-size:24px;font-weight:600;color:var(--text);margin:0 0 8px}
+        .review-form-subtitle{font-family:var(--ff);font-size:14px;color:var(--text3);margin:0 0 24px}
+        
+        .review-form{display:flex;flex-direction:column;gap:18px}
+        .review-rating-section{display:flex;flex-direction:column;gap:8px}
+        .review-rating-section label{font-family:var(--ff);font-size:13px;color:var(--text2)}
+        .review-stars{display:flex;gap:4px}
+        .review-star{background:none;border:none;padding:2px;cursor:pointer;color:var(--text3);transition:color .15s}
+        .review-star.active{color:var(--green)}
+        .review-star:hover{color:var(--green)}
+        
+        .review-field{display:flex;flex-direction:column;gap:6px}
+        .review-field label{font-family:var(--ff);font-size:13px;color:var(--text2)}
+        .review-field input,.review-field select,.review-field textarea{
+          background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;
+          font-family:var(--ff);font-size:14px;color:var(--text);transition:border-color .2s}
+        .review-field input:focus,.review-field select:focus,.review-field textarea:focus{
+          outline:none;border-color:var(--green)}
+        .review-field input::placeholder,.review-field textarea::placeholder{color:var(--text3)}
+        .review-field select{cursor:pointer}
+        .review-field textarea{resize:vertical;min-height:100px}
+        .review-field-note{font-family:var(--ff);font-size:11px;color:var(--text3)}
+        
+        .review-submit-btn{display:flex;align-items:center;justify-content:center;gap:8px;
+          background:var(--green);color:var(--bg);border:none;padding:14px 24px;border-radius:8px;
+          font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:opacity .2s;margin-top:8px}
+        .review-submit-btn:hover{opacity:.9}
+        .review-submit-btn:disabled{opacity:.6;cursor:not-allowed}
+        
+        .review-spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.2);border-top-color:var(--bg);
+          border-radius:50%;animation:spin .6s linear infinite}
+        
+        .review-success{text-align:center;padding:20px 0}
+        .review-success-icon{color:var(--green);margin-bottom:16px}
+        .review-success h3{font-family:var(--ff);font-size:22px;font-weight:600;color:var(--text);margin:0 0 10px}
+        .review-success p{font-family:var(--ff);font-size:14px;color:var(--text2);margin:0 0 24px;line-height:1.6}
+        .review-done-btn{background:var(--green);color:var(--bg);border:none;padding:12px 28px;border-radius:8px;
+          font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:opacity .2s}
+        .review-done-btn:hover{opacity:.9}
+        
         @media(max-width:700px){
           .modal-inner{grid-template-columns:1fr}
           .modal-right{border-top:1px solid var(--border);border-right:none}
@@ -738,6 +796,7 @@ export default function TheSessionMethod() {
           .review-summary{flex-direction:column;gap:20px}
           .rs-divider{width:100%;height:1px}
           .dl-box{padding:36px 24px}
+          .review-form-modal{padding:24px;margin:10px}
         }
       `}</style>
 
@@ -1380,6 +1439,10 @@ export default function TheSessionMethod() {
                 ))}
               </div>
             )}
+
+            <div className="review-form-container">
+              <ReviewForm />
+            </div>
           </div>
         </div>
       </div>
