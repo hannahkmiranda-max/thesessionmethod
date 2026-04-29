@@ -713,6 +713,10 @@ export default function TheSessionMethod() {
           width:100%;padding:12px;cursor:pointer;transition:all .2s;text-decoration:none;display:block}
         .dl-btn-sec:hover{border-color:var(--text2);color:var(--text)}
         .dl-note{margin-top:18px;font-family:var(--fm);font-size:10px;color:var(--text3);letter-spacing:.08em}
+        .dl-warning{display:flex;align-items:flex-start;gap:10px;background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);
+          border-radius:8px;padding:12px 14px;margin-bottom:16px;text-align:left}
+        .dl-warning svg{flex-shrink:0;stroke:#FFB400;margin-top:1px}
+        .dl-warning span{font-family:var(--ff);font-size:12px;color:#FFB400;line-height:1.5}
         .dl-order-id{font-family:var(--fm);font-size:10px;color:var(--text3);margin-bottom:6px}
         .dl-order-id span{color:var(--green)}
         
@@ -1520,11 +1524,19 @@ export default function TheSessionMethod() {
               <div style={{ fontFamily: "var(--fm)", fontSize: 10, color: "var(--green)" }}>Included</div>
             </div>
           </div>
+          <div className="dl-warning">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>Once you close this window, you cannot return to this page. Download now or check your email for the backup link.</span>
+          </div>
           <button className="dl-btn-main" onClick={downloadWorkbook}>
             ↓ Download The Session Blueprint PDF
           </button>
           <button className="dl-btn-sec" onClick={() => setDownloadOpen(false)}>
-            Close this window
+            I have downloaded — Close this window
           </button>
           <div className="dl-note">LIFETIME ACCESS · SAVE TO ANY DEVICE · PRINT-FRIENDLY</div>
         </div>
