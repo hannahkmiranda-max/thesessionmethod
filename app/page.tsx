@@ -1478,7 +1478,15 @@ export default function TheSessionMethod() {
           <button className="modal-close" onClick={() => setCheckoutOpen(false)}>
             ✕
           </button>
-          <Checkout productId="session-method-workbook" />
+          <Checkout 
+            productId="session-method-workbook" 
+            onComplete={() => {
+              setCheckoutOpen(false)
+              setOrderId(`TSM-${Date.now().toString(36).toUpperCase()}`)
+              setConfirmEmail(email || "your email")
+              setDownloadOpen(true)
+            }}
+          />
         </div>
       </div>
 
