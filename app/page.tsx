@@ -213,9 +213,9 @@ export default function TheSessionMethod() {
   }
 
   const downloadWorkbook = () => {
-    // Download the static premium PDF file
+    // Download the static premium PDF file from products folder
     const a = document.createElement("a")
-    a.href = "/The-Session-Blueprint-Premium.pdf"
+    a.href = "/products/The-Session-Blueprint-Premium.pdf"
     a.download = "The-Session-Blueprint-Premium-2026.pdf"
     a.click()
   }
