@@ -213,63 +213,11 @@ export default function TheSessionMethod() {
   }
 
   const downloadWorkbook = () => {
-    const content = `%PDF-1.4
-1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
-2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj
-3 0 obj<</Type/Page/MediaBox[0 0 612 792]/Parent 2 0 R/Resources<</Font<</F1<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold>>>>>>>/Contents 4 0 R>>endobj
-4 0 obj<</Length 420>>
-stream
-BT
-/F1 28 Tf
-200 720 Td
-(THE SESSION BLUEPRINT) Tj
-/F1 14 Tf
-0 -50 Td
-(Institutional Order Flow Trading System) Tj
-/F1 12 Tf
-0 -40 Td
-(Thank you for your purchase!) Tj
-0 -25 Td
-(This is a placeholder PDF for demonstration.) Tj
-0 -25 Td
-(Your actual workbook PDF would be delivered here.) Tj
-0 -40 Td
-(Modules Included:) Tj
-0 -22 Td
-(Module 1: Understanding the Foundation) Tj
-0 -18 Td
-(Module 2: Compatible Instruments) Tj
-0 -18 Td
-(Module 3: The Three Sessions) Tj
-0 -18 Td
-(Module 4: Level Marking Pre-Market Ritual) Tj
-0 -18 Td
-(Module 5: Confluence Entry System) Tj
-0 -18 Td
-(... and 10 more modules) Tj
-0 -40 Td
-(The Session Method (c) 2026) Tj
-ET
-endstream
-endobj
-xref
-0 5
-0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000374 00000 n 
-trailer<</Size 5/Root 1 0 R>>
-startxref
-845
-%%EOF`
-    const blob = new Blob([content], { type: "application/pdf" })
-    const url = URL.createObjectURL(blob)
+    // Download the premium PDF from the API
     const a = document.createElement("a")
-    a.href = url
-    a.download = "The-Session-Blueprint-2026.pdf"
+    a.href = "/api/workbook"
+    a.download = "The-Session-Blueprint-Premium-2026.pdf"
     a.click()
-    URL.revokeObjectURL(url)
   }
 
   const total = 47 - discount
