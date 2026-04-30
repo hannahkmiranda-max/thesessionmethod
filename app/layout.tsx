@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Barlow, Barlow_Condensed, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { GoogleAnalytics } from '@/components/google-analytics'
 import './globals.css'
 
 const barlow = Barlow({ 
@@ -51,21 +52,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable}`}>
-      <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18126609251"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-18126609251');
-            `,
-          }}
-        />
-      </head>
       <body className="antialiased bg-[#070C11]">
+        <GoogleAnalytics />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
