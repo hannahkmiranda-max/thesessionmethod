@@ -52,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable}`}>
-      <head>
+      <body className="antialiased bg-[#070C11]">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18126609251"
           strategy="afterInteractive"
@@ -65,8 +65,6 @@ export default function RootLayout({
             gtag('config', 'AW-18126609251');
           `}
         </Script>
-      </head>
-      <body className="antialiased bg-[#070C11]">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
