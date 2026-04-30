@@ -27,6 +27,16 @@ export default function Checkout({
   }, [productId])
 
   const handleComplete = useCallback(() => {
+    // Google Ads purchase conversion tracking
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18126609251/s79_CJrB6qQcEOO2uMND',
+        'value': 1.0,
+        'currency': 'USD',
+        'transaction_id': ''
+      })
+    }
+    
     if (onComplete) {
       onComplete()
     }
