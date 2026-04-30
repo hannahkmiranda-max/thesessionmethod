@@ -4,5 +4,6 @@ interface Window {
     targetId: string | Date,
     config?: Record<string, unknown>
   ) => void
+  gtag_report_conversion: (url?: string) => boolean
   dataLayer: unknown[]
 }

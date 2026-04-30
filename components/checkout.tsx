@@ -28,13 +28,8 @@ export default function Checkout({
 
   const handleComplete = useCallback(() => {
     // Google Ads purchase conversion tracking
-    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-18126609251/s79_CJrB6qQcEOO2uMND',
-        'value': 1.0,
-        'currency': 'USD',
-        'transaction_id': ''
-      })
+    if (typeof window !== 'undefined' && typeof window.gtag_report_conversion === 'function') {
+      window.gtag_report_conversion()
     }
     
     if (onComplete) {
