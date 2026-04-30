@@ -52,12 +52,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased bg-[#070C11]">
+      <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18126609251"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -65,6 +65,8 @@ export default function RootLayout({
             gtag('config', 'AW-18126609251');
           `}
         </Script>
+      </head>
+      <body className="antialiased bg-[#070C11]">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
